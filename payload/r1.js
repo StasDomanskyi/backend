@@ -9,8 +9,9 @@ module.exports = {
 
   getClient: (req, res) => {
     let query = req.params.key === 'user_name' ?
-    `SELECT * FROM r1 WHERE ${req.params.key} = "${req.params.value}"` :
-    `SELECT * FROM r1 WHERE ${req.params.key} = ${req.params.value}`;
+    `SELECT * FROM r1 WHERE ${req.params.key} = "${req.params.value}" AND user_status = 'активний'` :
+    `SELECT * FROM r1 WHERE ${req.params.key} = ${req.params.value} AND user_status = 'активний'`;
+  /*   ${req.body.email_state ? ' AND email = ' + '\"'+ req.params.email_state + '\";' : ';'}` */
             
     connection.query(query, (err, data) => {
       let user = data;
