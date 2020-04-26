@@ -1,13 +1,13 @@
 const connection = require('./database');
 
 module.exports = {
-  getAll: (req, res) => {
+/*   getAll: (req, res) => {
     connection.query('SELECT * FROM r1', (err, data) => {
       res.send(data);
     })
-  },
+  }, */
 
-  getClient: (req, res) => {
+/*   getDomain: (req, res) => {
     let query = req.params.key === 'user_name' ?
     `SELECT * FROM r1 WHERE ${req.params.key} LIKE "%${req.params.value}%" AND user_status = ${req.params.status}` :
     `SELECT * FROM r1 WHERE ${req.params.key} = ${req.params.value} AND user_status = ${req.params.status}`;
@@ -15,33 +15,35 @@ module.exports = {
     connection.query(query, (err, data) => {
       res.send(data);
     });
-  },
+  }, */
 
-  postClient: (req, res) => { 
+  postDomain: (req, res) => { 
     console.log(req.body); 
     connection.query(`
-      INSERT r1(user_number, user_name, email, phone, user_status, balance)
-      VALUES (
-        '${req.body.user_number}',
-        '${req.body.user_name}',
-        '${req.body.email}',
-        '${req.body.phone}',
-        '${req.body.status}',
-        '${req.body.balance}'
-      )`, (err, data) => { 
+    INSERT r8(domain_name, NS, client_number, domain_status, invoice, register, register_date, end_date) 
+    VALUES (
+      '${req.body.domain_name}',
+      '${req.body.NS}',
+      '${req.body.client_number}',
+      '${req.body.domain_status}',
+      '${req.body.invoice}',
+      '${req.body.register}',
+      '${req.body.register_date}',
+      '${req.body.end_date}'
+    )`, (err, data) => { 
       res.send(req.body);
     });
   },
 
-  updateClient: (req, res) => {
+/*   updateDomain: (req, res) => {
     connection.query(`UPDATE r1
     SET ${req.body.field} = '${req.body.valueOfField}'
     WHERE ${req.body.key} = ${req.body.valueOfKey};`, (err, data) => {
       res.send(req.body);
     });
-  },
+  }, */
 
-  deleteClient: (req, res) => {
+/*   deleteDomain: (req, res) => {
     let query = req.params.key === 'user_name' ?
     `DELETE FROM r1 WHERE ${req.params.key} = "${req.params.value}"` :
     `DELETE FROM r1 WHERE ${req.params.key} = ${req.params.value}`;
@@ -49,5 +51,5 @@ module.exports = {
     connection.query(query, (err, data) => {
       res.send({message: 'deleted'});
     });
-  }
+  } */
 }

@@ -18,14 +18,20 @@ module.exports = {
     });
   },
 
-  /* postClient: (req, res) => { 
+  postAccount: (req, res) => { 
     console.log(req.body); 
     connection.query(`
-      INSERT r1(user_number, user_name, email, phone, user_status, balance)
-      VALUES ('${req.body.user_number}', '${req.body.user_name}', '${req.body.email}', '${req.body.phone}', '${req.body.status}', '${req.body.balance}')`, (err, data) => { 
+      INSERT r2(account_number, account_description, sum, account_status, client_number)
+      VALUES (
+        '${req.body.account_number}',
+        '${req.body.account_description}',
+        '${req.body.sum}',
+        '${req.body.account_status}',
+        '${req.body.client_number}'
+      )`, (err, data) => {
       res.send(req.body);
     });
-  }, */
+  },
 
   /* updateClient: (req, res) => {
     connection.query(`UPDATE r1

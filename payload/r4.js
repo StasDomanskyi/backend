@@ -1,19 +1,13 @@
 const connection = require('./database');
 
 module.exports = {
-/*   getAll: (req, res) => {
+/*   getSupportAll: (req, res) => {
     connection.query('SELECT * FROM r2', (err, data) => {
       res.send(data);
     })
   }, */
 
-  getService: (req, res) => {
-
-/* `SELECT * 
-FROM CUSTOMERS 
-WHERE ID IN (SELECT ID 
-      FROM CUSTOMERS 
-      WHERE SALARY > 44000);` */
+  getSupport: (req, res) => {
     let query = 
     `SELECT * FROM r4
     WHERE ticket_status = ${req.params.status} 
@@ -29,14 +23,20 @@ WHERE ID IN (SELECT ID
     });
   },
 
-  /* postClient: (req, res) => { 
+  postSupport: (req, res) => { 
     console.log(req.body); 
     connection.query(`
-      INSERT r1(user_number, user_name, email, phone, user_status, balance)
-      VALUES ('${req.body.user_number}', '${req.body.user_name}', '${req.body.email}', '${req.body.phone}', '${req.body.status}', '${req.body.balance}')`, (err, data) => { 
+      INSERT r4(prefix, ticket_number, executive_worker, ticket_status, client_number)
+      VALUES (
+        '${req.body.prefix}',
+        '${req.body.ticket_number}',
+        '${req.body.executive_worker}',
+        '${req.body.ticket_status}',
+        '${req.body.client_number}'
+      )`, (err, data) => {
       res.send(req.body);
     });
-  }, */
+  },
 
   /* updateClient: (req, res) => {
     connection.query(`UPDATE r1
