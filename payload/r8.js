@@ -7,15 +7,18 @@ module.exports = {
     })
   }, */
 
-/*   getDomain: (req, res) => {
-    let query = req.params.key === 'user_name' ?
-    `SELECT * FROM r1 WHERE ${req.params.key} LIKE "%${req.params.value}%" AND user_status = ${req.params.status}` :
-    `SELECT * FROM r1 WHERE ${req.params.key} = ${req.params.value} AND user_status = ${req.params.status}`;
+  getDomain: (req, res) => {
+    let query = `
+      SELECT r1.user_name, r1.email, r8.domain_name, r8.NS, r8.register, r8.register_date, r8.end_date 
+      FROM r8 LEFT JOIN r1 ON r1.user_number=r8.client_number 
+      WHERE r8.end_date >= CURRENT_DATE AND r8.register LIKE "%${req.params.register}%"
+      ORDER BY 1
+    `;
             
     connection.query(query, (err, data) => {
       res.send(data);
     });
-  }, */
+  },
 
   postDomain: (req, res) => { 
     console.log(req.body); 

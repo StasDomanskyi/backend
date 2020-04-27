@@ -26,7 +26,7 @@ module.exports = {
         '${req.body.user_name}',
         '${req.body.email}',
         '${req.body.phone}',
-        '${req.body.status}',
+        '${req.body.user_status}',
         '${req.body.balance}'
       )`, (err, data) => { 
       res.send(req.body);

@@ -33,15 +33,15 @@ module.exports = {
     });
   },
 
-  /* updateClient: (req, res) => {
-    connection.query(`UPDATE r1
+  updateAccount: (req, res) => {
+    connection.query(`UPDATE r2
     SET ${req.body.field} = '${req.body.valueOfField}'
     WHERE ${req.body.key} = ${req.body.valueOfKey};`, (err, data) => {
       res.send(req.body);
     });
-  }, */
+  },
 
-  /* deleteClient: (req, res) => {
+  /* deleteAccount: (req, res) => {
     let query = req.params.key === 'user_name' ?
     `DELETE FROM r1 WHERE ${req.params.key} = "${req.params.value}"` :
     `DELETE FROM r1 WHERE ${req.params.key} = ${req.params.value}`;

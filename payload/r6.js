@@ -43,18 +43,20 @@ module.exports = {
     });
   },
 
-/*   updateEmployee: (req, res) => {
-    connection.query(`UPDATE r1
-    SET ${req.body.field} = '${req.body.valueOfField}'
-    WHERE ${req.body.key} = ${req.body.valueOfKey};`, (err, data) => {
+  updateEmployee: (req, res) => {
+    connection.query(`
+      UPDATE r6
+      SET ${req.body.field} = '${req.body.valueOfField}'
+      WHERE ${req.body.key} LIKE "%${req.body.valueOfKey}%";
+    `, (err, data) => {
       res.send(req.body);
     });
-  }, */
+  },
 
 /*   deleteEmployee: (req, res) => {
     let query = req.params.key === 'user_name' ?
-    `DELETE FROM r1 WHERE ${req.params.key} = "${req.params.value}"` :
-    `DELETE FROM r1 WHERE ${req.params.key} = ${req.params.value}`;
+    `DELETE FROM r6 WHERE ${req.params.key} = "${req.params.value}"` :
+    `DELETE FROM r6 WHERE ${req.params.key} = ${req.params.value}`;
 
     connection.query(query, (err, data) => {
       res.send({message: 'deleted'});

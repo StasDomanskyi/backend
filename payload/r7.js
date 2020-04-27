@@ -34,18 +34,20 @@ module.exports = {
     });
   },
 
-/*   updateClient: (req, res) => {
-    connection.query(`UPDATE r1
-    SET ${req.body.field} = '${req.body.valueOfField}'
-    WHERE ${req.body.key} = ${req.body.valueOfKey};`, (err, data) => {
+  updateServer: (req, res) => {
+    connection.query(`
+      UPDATE r7
+      SET ${req.body.field} = '${req.body.valueOfField}'
+      WHERE ${req.body.key} LIKE "%${req.body.valueOfKey}%";
+    `, (err, data) => {
       res.send(req.body);
     });
-  }, */
+  },
 
-/*   deleteClient: (req, res) => {
+/*   deleteServer: (req, res) => {
     let query = req.params.key === 'user_name' ?
-    `DELETE FROM r1 WHERE ${req.params.key} = "${req.params.value}"` :
-    `DELETE FROM r1 WHERE ${req.params.key} = ${req.params.value}`;
+    `DELETE FROM r7 WHERE ${req.params.key} = "${req.params.value}"` :
+    `DELETE FROM r7 WHERE ${req.params.key} = ${req.params.value}`;
 
     connection.query(query, (err, data) => {
       res.send({message: 'deleted'});
