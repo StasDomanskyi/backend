@@ -21,7 +21,6 @@ module.exports = {
   },
 
   postDomain: (req, res) => { 
-    console.log(req.body); 
     connection.query(`
     INSERT r8(domain_name, NS, client_number, domain_status, invoice, register, register_date, end_date) 
     VALUES (
@@ -38,21 +37,22 @@ module.exports = {
     });
   },
 
-/*   updateDomain: (req, res) => {
-    connection.query(`UPDATE r1
-    SET ${req.body.field} = '${req.body.valueOfField}'
-    WHERE ${req.body.key} = ${req.body.valueOfKey};`, (err, data) => {
+  updateDomain: (req, res) => {
+    connection.query(`
+      UPDATE r8
+      SET ${req.body.field} = '${req.body.valueOfField}'
+      WHERE ${req.body.key} LIKE "%${req.body.valueOfKey}%";
+    `, (err, data) => {
       res.send(req.body);
     });
-  }, */
+  },
 
-/*   deleteDomain: (req, res) => {
-    let query = req.params.key === 'user_name' ?
-    `DELETE FROM r1 WHERE ${req.params.key} = "${req.params.value}"` :
-    `DELETE FROM r1 WHERE ${req.params.key} = ${req.params.value}`;
-
-    connection.query(query, (err, data) => {
+  deleteDomain: (req, res) => {
+    connection.query(`
+      DELETE FROM r8
+      WHERE ${req.params.key} = '${req.params.value}';
+    `, (err, data) => {
       res.send({message: 'deleted'});
     });
-  } */
+  }
 }

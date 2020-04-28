@@ -8,23 +8,18 @@ module.exports = {
   }, */
 
   getSupport: (req, res) => {
-    let query = 
-    `SELECT * FROM r4
-    WHERE ticket_status = ${req.params.status} 
-    AND client_number = (
-      SELECT user_number FROM r1
-      WHERE ${req.params.key} LIKE "%${req.params.value}%"
-    )`;
-    
-    console.log(query);
-            
-    connection.query(query, (err, data) => {      
+    connection.query(`
+      SELECT * FROM r4
+      WHERE ticket_status = ${req.params.status} 
+      AND client_number = (
+        SELECT user_number FROM r1
+        WHERE ${req.params.key} LIKE "%${req.params.value}%"
+    )`, (err, data) => {      
       res.send(data);
     });
   },
 
   postSupport: (req, res) => { 
-    console.log(req.body); 
     connection.query(`
       INSERT r4(prefix, ticket_number, executive_worker, ticket_status, client_number)
       VALUES (
@@ -40,19 +35,19 @@ module.exports = {
 
   updateSupport: (req, res) => {
     connection.query(`UPDATE r4
-    SET ${req.body.field} = '${req.body.valueOfField}'
-    WHERE ${req.body.key} = ${req.body.valueOfKey};`, (err, data) => {
-      res.send(req.body);
+      SET ${req.body.field} = '${req.body.valueOfField}'
+      WHERE ${req.body.key} = ${req.body.valueOfKey};`, (err, data) => {
+        res.send(req.body);
     });
   },
 
-  /* deleteSupport: (req, res) => {
-    let query = req.params.key === 'user_name' ?
-    `DELETE FROM r4 WHERE ${req.params.key} = "${req.params.value}"` :
-    `DELETE FROM r4 WHERE ${req.params.key} = ${req.params.value}`;
-
-    connection.query(query, (err, data) => {
+  deleteSupport: (req, res) => {
+    connection.query(`
+      DELETE FROM r4
+      WHERE prefix = '${req.params.prefix}'
+      AND ticket_number = '${req.params.ticket_number}';
+    `, (err, data) => {
       res.send({message: 'deleted'});
     });
-  } */
+  }
 }

@@ -8,19 +8,16 @@ module.exports = {
   }, */
 
   getAddon: (req, res) => {
-    let query = 
-    `SELECT * FROM r5 WHERE  ${req.params.key} 
-    LIKE "%${req.params.value}%" AND addon_status = ${req.params.status}`;
-    
-    console.log(query);
-            
-    connection.query(query, (err, data) => {      
+    connection.query(`
+      SELECT * FROM r5
+      WHERE  ${req.params.key} LIKE "%${req.params.value}%" 
+      AND addon_status = ${req.params.status};
+    `, (err, data) => {      
       res.send(data);
     });
   },
 
   postAddon: (req, res) => { 
-    console.log(req.body); 
     connection.query(`
       INSERT r5(addon_name, addon_number, client_number, main_domain, addon_status, order_date, end_date)
       VALUES (
@@ -37,20 +34,21 @@ module.exports = {
   },
 
   updateAddon: (req, res) => {
-    connection.query(`UPDATE r5
-    SET ${req.body.field} = '${req.body.valueOfField}'
-    WHERE ${req.body.key} = ${req.body.valueOfKey};`, (err, data) => {
+    connection.query(`
+      UPDATE r5
+      SET ${req.body.field} = '${req.body.valueOfField}'
+      WHERE ${req.body.key} = '${req.body.valueOfKey}';
+    `, (err, data) => {
       res.send(req.body);
     });
   },
 
-  /* deleteAddon: (req, res) => {
-    let query = req.params.key === 'user_name' ?
-    `DELETE FROM r5 WHERE ${req.params.key} = "${req.params.value}"` :
-    `DELETE FROM r5 WHERE ${req.params.key} = ${req.params.value}`;
-
-    connection.query(query, (err, data) => {
+  deleteAddon: (req, res) => {
+    connection.query(`
+      DELETE FROM r5
+      WHERE ${req.params.key} = '${req.params.value}';
+    `, (err, data) => {
       res.send({message: 'deleted'});
     });
-  } */
+  }
 }

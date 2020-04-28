@@ -17,8 +17,7 @@ module.exports = {
     });
   }, */
 
-  postServer: (req, res) => { 
-    console.log(req.body); 
+  postServer: (req, res) => {
     connection.query(`
       INSERT r7(server_name, RAM, CPU, drive_size, handler, db_version, services)
       VALUES (
@@ -44,13 +43,12 @@ module.exports = {
     });
   },
 
-/*   deleteServer: (req, res) => {
-    let query = req.params.key === 'user_name' ?
-    `DELETE FROM r7 WHERE ${req.params.key} = "${req.params.value}"` :
-    `DELETE FROM r7 WHERE ${req.params.key} = ${req.params.value}`;
-
-    connection.query(query, (err, data) => {
+  deleteServer: (req, res) => {
+    connection.query(`
+      DELETE FROM r7
+      WHERE ${req.params.key} = '${req.params.value}';
+    `, (err, data) => {
       res.send({message: 'deleted'});
     });
-  } */
+  }
 }
