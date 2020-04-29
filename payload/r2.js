@@ -1,11 +1,11 @@
 const connection = require('./database');
 
 module.exports = {
-/*   getAll: (req, res) => {
+  getAll: (req, res) => {
     connection.query('SELECT * FROM r2;', (err, data) => {
       res.send(data);
     })
-  }, */
+  },
 
   getAccount: (req, res) => {
     connection.query(`

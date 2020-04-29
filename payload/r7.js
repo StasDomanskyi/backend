@@ -1,13 +1,13 @@
 const connection = require('./database');
 
 module.exports = {
-/*   getAll: (req, res) => {
-    connection.query('SELECT * FROM r1', (err, data) => {
+  getAll: (req, res) => {
+    connection.query('SELECT * FROM r7', (err, data) => {
       res.send(data);
     })
-  }, */
+  },
 
-/*   getClient: (req, res) => {
+/*   getServer: (req, res) => {
     let query = req.params.key === 'user_name' ?
     `SELECT * FROM r1 WHERE ${req.params.key} LIKE "%${req.params.value}%" AND user_status = ${req.params.status}` :
     `SELECT * FROM r1 WHERE ${req.params.key} = ${req.params.value} AND user_status = ${req.params.status}`;
