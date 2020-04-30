@@ -27,8 +27,8 @@ module.exports = {
     connection.query(`
     SELECT r6.employee_full_name, r6.experience, r6.position, r6.email, r6.employee_number, r4.ticket_status, r4.ticket_number
     FROM r6 
-    LEFT JOIN r4 ON r6.employee_number = r4.executive_worker AND r4.ticket_status = ${req.params.status} 
-    WHERE r6.experience >= '${req.params.experience}
+    LEFT JOIN r4 ON r6.employee_number = r4.executive_worker AND r4.ticket_status = ${req.params.status}
+    WHERE r6.experience >= ${req.params.experience};
     `, (err, data) => {
       res.send(data);
     });
