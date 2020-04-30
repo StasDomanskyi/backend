@@ -7,15 +7,15 @@ module.exports = {
     })
   },
 
-/*   getServer: (req, res) => {
-    let query = req.params.key === 'user_name' ?
-    `SELECT * FROM r1 WHERE ${req.params.key} LIKE "%${req.params.value}%" AND user_status = ${req.params.status}` :
-    `SELECT * FROM r1 WHERE ${req.params.key} = ${req.params.value} AND user_status = ${req.params.status}`;
-            
-    connection.query(query, (err, data) => {
+  getServer: (req, res) => {
+    connection.query(`
+      SELECT * FROM r7
+      WHERE services LIKE "%${req.params.service}%"
+      AND db_version >= '${req.params.version}';
+    `, (err, data) => {
       res.send(data);
     });
-  }, */
+  },
 
   postServer: (req, res) => {
     connection.query(`

@@ -71,7 +71,7 @@ app.delete('/r6/:key/:value', r6.deleteEmployee);
 
 // R7 - TABLE
 app.get('/r7', r7.getAll);
-/* app.get('/r7/:key/:value/:status', r7.getServer); */
+app.get('/r7/:service/:version', r7.getServer);
 app.post('/r7', jsonParser, r7.postServer);
 app.put('/r7/:key/:value', jsonParser, r7.updateServer);
 app.delete('/r7/:key/:value', r7.deleteServer);
