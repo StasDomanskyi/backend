@@ -7,23 +7,28 @@ module.exports = {
     })
   },
 
+  /* SELECT * FROM 
+  (SELECT r6.employee_full_name,
+          r6.experience,
+          r6.position,
+          r6.email,
+          r6.employee_number,
+          r4.ticket_status,
+          COUNT(r4.ticket_status) AS count_of_open_tickets FROM r6 
+  LEFT JOIN r4 ON r6.employee_number = r4.executive_worker AND r4.ticket_status = ${req.params.status}
+  WHERE r6.experience >= '${req.params.experience}'
+  GROUP BY 1,2,3,4,5 
+  ORDER BY 1)a
+  WHERE a.count_of_open_tickets > 0
+  GROUP BY 1,2,3,4,5 
+  ORDER BY 1 */
+
   getEmployee: (req, res) => {           
     connection.query(`
-    SELECT * FROM 
-    (SELECT r6.employee_full_name,
-            r6.experience,
-            r6.position,
-            r6.email,
-            r6.employee_number,
-            r4.ticket_status,
-            COUNT(r4.ticket_status) AS count_of_open_tickets FROM r6 
-    LEFT JOIN r4 ON r6.employee_number = r4.executive_worker AND r4.ticket_status = ${req.params.status}
-    WHERE r6.experience >= '${req.params.experience}'
-    GROUP BY 1,2,3,4,5 
-    ORDER BY 1)a
-    WHERE a.count_of_open_tickets > 0
-    GROUP BY 1,2,3,4,5 
-    ORDER BY 1
+    SELECT r6.employee_full_name, r6.experience, r6.position, r6.email, r6.employee_number, r4.ticket_status, r4.ticket_number
+    FROM r6 
+    LEFT JOIN r4 ON r6.employee_number = r4.executive_worker AND r4.ticket_status = ${req.params.status} 
+    WHERE r6.experience >= '${req.params.experience}
     `, (err, data) => {
       res.send(data);
     });
